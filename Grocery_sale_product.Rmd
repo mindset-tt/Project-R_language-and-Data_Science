@@ -44,7 +44,7 @@ names(counts) <- c("item", "n")
 sortedCounts <- counts[order(-counts$n),]
 ```
 
-ນຳເອົາຂໍ້ມູນສິນຄ້າເທື່ອລະ50ລາຍການທີ່ໄດ້ຂາຍມາສະແດງ
+ນຳເອົາຂໍ້ມູນສິນຄ້າ50ລາຍການທີ່ໄດ້ຂາຍມາສະແດງ
 
 ```{r}
 product1 <- sortedCounts[1:50,]
@@ -55,7 +55,7 @@ ggplot(data = product1, aes(x = item,y = n,fill = item), label=TRUE) +
     theme_minimal()
 ```
 
-ເອົາຂໍ້ມູນສິນຄ້າທີ່ໄດ້ຮັບຄວາມນິຍົມ
+ເອົາຂໍ້ມູນສິນຄ້າທີ່ໄດ້ຮັບຄວາມນິຍົມມາຈດເປັນ 10  ອັນດັບທຳອິດ
 
 ```{r}
 topTen <- sortedCounts[1:10,]
@@ -68,9 +68,8 @@ ggplot(data = topTen, aes(x = item,y = n,fill = item), label=TRUE) +
     geom_text(aes(label = n))
 ```
 
+ລວມຈຳນວນສິນຄ້າທີ່ໄດ້ຂາຍໃນແຕ່ລະມື້ ແລ້ວນຳຂໍ້ມູນມາສະແດງໃຫ້ເຫັນເປັນກຣາຟ
 ```{r}
-
-####################################################
 su <- filter(grocery,weekday == "Sunday")
 mo <- filter(grocery,weekday == "Monday")
 tu <- filter(grocery,weekday == "Tuesday")
@@ -91,7 +90,7 @@ ggplot(weekk,aes(week,n,fill=week))+geom_bar(stat = "identity")+
   geom_text(aes(label = n))
 ```
 
-
+ລວມຈຳນວນສິນຄ້າທີ່ໄດ້ຂາຍໃນແຕ່ລະເດືອນ ແລ້ວນຳຂໍ້ມູນມາສະແດງໃຫ້ເຫັນເປັນກຣາຟ
 ```{r}
 mont <- count(grocery,grocery$month)
 names(mont) <- c("month","n")
@@ -102,6 +101,7 @@ ggplot(mont,aes(month,n,fill=month))+geom_bar(stat = "identity")+
   geom_text(aes(label = n))
 ```
 
+ດຶງເອົາຂໍ້ມູນສິນຄ້າທີ່ໄດ້ຂາຍດີທີ່ສຸດ 10 ອັນດັບທຳອິດມາສະແດງເປັນຈຳນວນທີ່ໄດ້ຂາຍໃນແຕ່ລະວັນທິດຫາວັນເສົາ
 ````{r}
 milk <- grocery[grocery$item == "whole milk",-c(1,2,3,5)]
 vegOther <- grocery[grocery$item == "other vegetables",-c(1,2,3,5)]
@@ -178,9 +178,8 @@ ggplot(data = widetable, aes(x = weekday)) +
   theme_minimal()
 ````
 
+ດຶງເອົາຂໍ້ມູນສິນຄ້າທີ່ໄດ້ຂາຍດີທີ່ສຸດມາສະແດງເປັນຈຳນວນທີ່ໄດ້ຂາຍໃນແຕ່ລະເດືອນ
 ````{r}
-
-####################################################
 milk <- grocery[grocery$item == "whole milk",-c(1,2,3,6)]
 vegOther <- grocery[grocery$item == "other vegetables",-c(1,2,3,6)]
 rolls <- grocery[grocery$item == "rolls/buns",-c(1,2,3,6)]
@@ -261,6 +260,8 @@ ggplot(data = widetable, aes(x = month)) +
                          guide = "legend")
 ````
 
+
+ການວິເຄາະຂອງສິນຄ້າໃນແຕ່ລະເດືອນ
 ````{r}
 ggplot(data = widetable, aes(x = month)) +
     geom_line(aes(y = vegOther, color = "green")) +
@@ -284,16 +285,9 @@ ggplot(data = widetable, aes(x = month)) +
                          guide = "legend")
 ````
 
+ວິເຄາະຄວາມສຳພັນຂອງສິນຄ້າ
 ````{r}
-# Create new dataset containing just transaction ids and items purchased
 groceryAssoc <- grocery[,c(4,3)]
 head(groceryAssoc)
 
-write.csv(groceryAssoc, file = tmp <- file(), row.names = FALSE)
-txn <- read.transactions(tmp, rm.duplicates = FALSE,
-                         format = "single", sep = ',', cols = c(1,2))
-close(tmp)
-
-# Create set of rules
-rules <- apriori(txn, parameter = list(supp = 0.01, conf = 0.05, target = 'rules'))
 ````
