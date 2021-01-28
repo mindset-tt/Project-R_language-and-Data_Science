@@ -1,0 +1,8 @@
+opencv-python==4.5.1
+shutil
+opencv-contrib-python==4.5.1
+opencv-contrib-python-headless==4.5.1
+pillow
+pandas
+Image
+numpy
