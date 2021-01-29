@@ -190,6 +190,7 @@ fruitTrop <- grocery[grocery$item == "tropical fruit",-c(1,2,3,6)]
 water <- grocery[grocery$item == "bottled water",-c(1,2,3,6)]
 sausage <- grocery[grocery$item == "sausage",-c(1,2,3,6)]
 fruitCitrus <- grocery[grocery$item == "citrus fruit",-c(1,2,3,6)]
+meat <- grocery[grocery$item == "meat",-c(1,2,3,6)]
 groupByMonth <- function(x) {
     x %>%
         group_by(month) %>%
@@ -205,6 +206,7 @@ seriesFruitTrop <- groupByMonth(fruitTrop)
 seriesWater <- groupByMonth(water)
 seriesSausage <- groupByMonth(sausage)
 seriesFruitCitrus <- groupByMonth(fruitCitrus)
+seriesMeat <- groupByMonth(meat)
 wide <- data.frame(month = as.numeric(c(1:12)),
                                            milk = seriesMilk$num,
                                            vegOther = seriesVegOther$num,
@@ -215,7 +217,8 @@ wide <- data.frame(month = as.numeric(c(1:12)),
                                            fruitTrop = seriesFruitTrop$num,
                                            water = seriesWater$num,
                                            sausage = seriesSausage$num,
-                                           fruitCitrus = seriesFruitCitrus$num)
+                                           fruitCitrus = seriesFruitCitrus$num,
+                                           meat = seriesMeat$num)
 ggplot(data = wide, aes(x = month)) +
     geom_line(aes(y = milk, color = "black")) +
     geom_line(aes(y = vegOther, color = "blue")) +
@@ -237,7 +240,7 @@ ggplot(data = wide, aes(x = month)) +
                          labels = c("Milk", "Other Vegetables", "Rolls/Buns",
                                     "Soda", "Yogurt"),
                          guide = "legend")
-ggplot(data = widetable, aes(x = month)) +
+ggplot(data = wide, aes(x = month)) +
     geom_line(aes(y = milk, color = "black")) +
     geom_line(aes(y = sausage, color = "blue")) +
     geom_line(aes(y = rolls, color = "orange")) +
@@ -263,7 +266,7 @@ ggplot(data = widetable, aes(x = month)) +
 
 ການວິເຄາະຂອງສິນຄ້າໃນແຕ່ລະເດືອນ
 ````{r}
-ggplot(data = widetable, aes(x = month)) +
+ggplot(data = wide, aes(x = month)) +
     geom_line(aes(y = vegOther, color = "green")) +
     geom_line(aes(y = vegRoot, color = "purple")) +
     geom_line(aes(y = meat, color = "red")) +
@@ -291,3 +294,7 @@ groceryAssoc <- grocery[,c(4,3)]
 head(groceryAssoc)
 
 ````
+
+```{r}
+
+```
