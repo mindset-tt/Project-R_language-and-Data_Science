@@ -2,10 +2,17 @@
 
 This repository contains code for facial recognition using openCV and python with a tkinter gui interface. If you want to test the code then run train.py file
 You must install library by using Anaconda prompt:
+
 conda install -c conda-forge opencv
+
 conda install -c conda-forge dlib
+
 conda install -c conda-forge cmake
+
 pip install -r pip_install.txt
+
+###you must delete file txt from imageunknown, TrainingImage, TrainningImageLabel####
+
 
 
 Technology used :
