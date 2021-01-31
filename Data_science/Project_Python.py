@@ -1,3 +1,4 @@
+#Reading readme.md before using
 import tkinter as tk
 from tkinter import Message ,Text
 import cv2,os
